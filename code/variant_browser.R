@@ -4,7 +4,7 @@ browser_tab <-
           h1("Explore the variants and view annotation information"),
           br(),
           fluidRow(
-            column(3,
+            column(2,
                 shinydashboard::box(title = h2("Inputs"), solidHeader = FALSE, width = 12,
                        # Drop down menu to select sample ID
                        selectInput(
@@ -29,7 +29,7 @@ browser_tab <-
                    verbatimTextOutput('selected_idx'),
                    div(id = "demo", class = "collapse", tableOutput('v_header'))
             ), # End of column2
-            column(3,
+            column(4,
                    shinydashboard::box(
                      title = h2("Selection Information"), solidHeader = FALSE, width = 12,
                      h4(htmlOutput('v_coords')),
