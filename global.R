@@ -16,6 +16,7 @@ library(IRanges)
 library(DT)
 library(GenomicRanges)
 library(ggvis)
+library(qqman)
 
 # Source everything on the code folder
 for (file in list.files('code', full.names = TRUE)){

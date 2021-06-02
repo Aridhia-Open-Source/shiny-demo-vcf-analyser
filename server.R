@@ -233,5 +233,22 @@ server <- function(input, output, session) {
     set_options(width = "auto", resizable=FALSE) %>%
     bind_shiny("ggvis_output_heatmap")
   
+  ####################################
+  ##### VARIANT QUAL DISTRIBUION #####
+  ####################################
+  
+  variants$CHROM <- gsub("chr","",variants$CHROM)
+  variants$CHROM <- gsub("X","23",variants$CHROM)
+  variants$CHROM <- gsub("Y","24",variants$CHROM)
+  variants$CHROM <- gsub("MT","25",variants$CHROM)
+  variants$CHROM <- as.numeric(as.character(variants$CHROM))
+  
+  output$manhattan <- renderPlot(      
+    manhattan(variants, snp = "ID", bp = "POS", chr = "CHROM", p = "QUAL", 
+              suggestiveline = 33, genomewideline = FALSE, chrlabs = c(1:21, "X", "Y"), 
+              main = "Manhattan Plot of VCF QUAL scores", col = c("blue4", "orange3"), 
+              logp = FALSE, ylab = "QUAL" , cex = 0.3)
+  )
+  
   
 }
