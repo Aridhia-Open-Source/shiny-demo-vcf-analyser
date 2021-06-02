@@ -1,0 +1,34 @@
+##################
+##### GLOBAL #####
+##################
+
+# Load libraries
+library(shiny)
+library(readr)
+library(shinyBS)
+library(shinydashboard)
+library(dplyr)
+library(DBI)
+library(RPostgreSQL)
+library(sqldf)
+library(ggbio)
+library(IRanges)
+library(DT)
+library(GenomicRanges)
+
+# Source everything on the code folder
+source("./code/variant_browser.R")
+
+# Set color
+getOption("biovizBase")$cytobandColor
+
+# Load data from biovizBase package
+data(hg19IdeogramCyto, package = "biovizBase")
+
+# Read Data
+sample_data <- read.csv("./data/vcf_sample_data.csv")
+variants <- read.csv("./data/vcf_data.csv")
+vcf_header <- read.csv("./data/vcf_header.csv")
+clinvar_variant_summary <- read.csv("./data/clinvar_variant_summary.csv")
+
+

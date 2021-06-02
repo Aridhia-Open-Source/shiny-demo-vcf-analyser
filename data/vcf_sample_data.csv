@@ -1,0 +1,2 @@
+sample_id, study_ref, sample_ref, vcf_path, vcf_format, bam_path
+OTHER,GELS00000000096,GELG00000000049,/geldisk2/Data/GELS00000000096/GELG00000000049/TSVC_variants_IonXpress_047_full.vcf,VCFv4.1,/geldisk2/Data/GELS00000000096/GELG00000000049/GELG00000000049.bam

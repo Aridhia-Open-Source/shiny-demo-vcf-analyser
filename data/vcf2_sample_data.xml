@@ -1,0 +1,13 @@
+<TableDefinition TableName='vcf_sample_data' Action='append'>
+  <Columns>
+    <Column Name='sample_id' Type='varchar(50)'/>
+    <Column Name='study_ref' Type='varchar(50)'/>
+	<Column Name='sample_ref' Type='varchar(50)'/>
+	<Column Name='vcf_path' Type='varchar(500)'/>
+	<Column Name='vcf_format' Type='varchar(50)'/>
+	<Column Name='bam_path' Type='varchar(500)'/>
+  </Columns>
+  <Format Delimiter=',' TextQualifier='"' NullQualifier='NA' Encoding='UTF-8' Header='true' HeaderCase='lower' DateFormat='ISO, DMY'/>
+  <Success RemovefromUpload='True'/>
+  <Fail RemovefromUpload='False'/>
+</TableDefinition>
