@@ -1,12 +1,11 @@
 browser_tab <- 
   
-  
   tabItem(tabName = "variant_browser", 
           h1("Explore the variants and view annotation information"),
           br(),
           fluidRow(
             column(3,
-                   box(title = h2("Inputs"), solidHeader = FALSE, width = 12,
+                shinydashboard::box(title = h2("Inputs"), solidHeader = FALSE, width = 12,
                        # Drop down menu to select sample ID
                        selectInput(
                          inputId='selected_sample',
@@ -14,13 +13,13 @@ browser_tab <-
                          choices=as.character(unique(variants[,c('sample_id')])),
                          selected = 'OTHER'
                        ),
-                       sliderInput(
-                         "coordinates", 
-                         label = h3("Coordinates"), 
-                         min = -10000000, 
-                         max = +10000000, 
-                         value = c(-1000000, +1000000)
+                       selectInput(
+                         inputId = "chromosome",
+                         label = "Filter by chromosome",
+                         choices= c("All", unique(variants[,c('CHROM')])),
+                         selected = 'All'
                          ),
+                       uiOutput("coordinates"),
                        div(style='height:100px;', plotOutput('v_ideogram', height="100px"))
                        ), # End of box
                    ), # End of column1
@@ -31,7 +30,7 @@ browser_tab <-
                    div(id = "demo", class = "collapse", tableOutput('v_header'))
             ), # End of column2
             column(3,
-                   box(
+                   shinydashboard::box(
                      title = h2("Selection Information"), solidHeader = FALSE, width = 12,
                      h4(htmlOutput('v_coords')),
                      h4(htmlOutput('v_ensemble_link')), 

@@ -15,9 +15,12 @@ library(ggbio)
 library(IRanges)
 library(DT)
 library(GenomicRanges)
+library(ggvis)
 
 # Source everything on the code folder
-source("./code/variant_browser.R")
+for (file in list.files('code', full.names = TRUE)){
+  source(file, local = TRUE)
+}
 
 # Set color
 getOption("biovizBase")$cytobandColor

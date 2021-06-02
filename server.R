@@ -4,14 +4,41 @@
 
 server <- function(input, output, session) {
   
+  ###########################
+  ##### VARIANT BROWSER #####
+  ###########################
+  
   start.loc <- 0
   end.loc <- 150000
   chr1.gr <- GenomicRanges::GRanges("X", IRanges(start.loc, end.loc))
   
   # Filter data by the sample selector
-  available_sample <- reactive({
+  sample <- reactive({
     
-    variants[variants$sample_id == input$selected_sample, c('sample_id','CHROM','POS','ID','REF','ALT','QUAL','FILTER')]
+    # Filter by chromosome
+    if (input$chromosome != "All") {
+      variants[variants$CHROM == input$chromosome & variants$sample_id == input$selected_sample, c('sample_id','CHROM','POS','ID','REF','ALT','QUAL','FILTER')]
+    } else {
+      variants[variants$sample_id == input$selected_sample, c('sample_id','CHROM','POS','ID','REF','ALT','QUAL','FILTER')]
+      
+    }
+    
+  })
+  
+  output$coordinates <- renderUI({
+    sliderInput(
+      inputId = "coordinates",
+      label = "Filter by position",
+      min = min(sample()$POS),
+      max = max(sample()$POS),
+      value = c(min(sample()$POS), max(sample()$POS)),
+      round = TRUE
+    )
+  })
+  
+  available_sample <- reactive({
+
+      sample()[sample()$POS >= input$coordinates[1] & sample()$POS <= input$coordinates[2], c('sample_id','CHROM','POS','ID','REF','ALT','QUAL','FILTER')]
     
   })
   
@@ -20,20 +47,6 @@ server <- function(input, output, session) {
     vcf_header[vcf_header$sample_id==input$selected_sample,c('sample_id','category','id','number','type','description','assembly','length')]
     
   })
-  
-  # This callback sends the calculated row index back as selected_idx
-  # TODO This is not handling filtered tables. Assumes all data is in the datatable
-  selected_idx <- c(
-    
-    "function(table) {",
-    "    table.on('click.dt', 'tr', function() {",
-    "        var r = $(this).context._DT_RowIndex;",
-    "        var i = table.page() * table.page.len() + r;",
-    "    Shiny.onInputChange('selected_idx', i);",
-    "    });",
-    "}"
-    
-  )
   
   output$variants_table <- DT::renderDataTable({available_sample()},
                                                selection = 'single', server = TRUE)
@@ -177,5 +190,18 @@ server <- function(input, output, session) {
   },
   include.rownames=FALSE)
   
+  ############################
+  ###### SNP DENSITIES #######
+  ############################
+  
+  snps <- reactive(
+    subset(variants, CHROM == input$bins & nchar(as.character(REF)) == 1 & nchar(as.character(ALT)) == 1 & as.numeric(POS) > input$coordinates[1] & as.numeric(POS) < input$coordinates[2])
+  )
+  
+  snps %>% ggvis(~POS, fill:="red") %>%
+    layer_densities() %>%
+    add_axis("x", title_offset = 60, title = "Chromosome Position") %>%
+    add_axis("y", title_offset = 110, title = "Density") %>%
+    bind_shiny("ggvis_output_density")  
   
 }

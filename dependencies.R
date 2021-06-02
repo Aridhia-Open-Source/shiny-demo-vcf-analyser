@@ -4,7 +4,7 @@
 
 
 # Packages needed to run the app
-packages <- c("shiny", "dplyr", "DBI", "RPostgreSQL", "sqldf", "GenomicRanges", "shinyBS", "ellipsis", "shinydashboard")
+packages <- c("shiny", "dplyr", "DBI", "RPostgreSQL", "sqldf", "GenomicRanges", "shinyBS", "ellipsis", "shinydashboard", "ggvis")
 
 
 # Install packages if not already installed
