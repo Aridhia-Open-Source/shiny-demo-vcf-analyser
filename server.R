@@ -202,7 +202,36 @@ server <- function(input, output, session) {
     layer_densities() %>%
     add_axis("x", title_offset = 60, title = "Chromosome Position") %>%
     add_axis("y", title_offset = 110, title = "Density") %>%
-    set_options(width = 1500, height = 500) %>%
-    bind_shiny("ggvis_output_density")  
+    set_options(width = "auto", resizable=FALSE) %>%
+    bind_shiny("ggvis_output_density")
+  
+  
+  #################################
+  ##### SNP TYPE DISTRIBUTION #####
+  #################################
+  
+  mut_counts <- reactive(
+    subset(variants, CHROM == input$heatBins & nchar(as.character(REF)) < 2 & nchar(as.character(ALT)) < 2 & as.numeric(POS) > as.numeric(input$heatPosition[1]) & as.numeric(POS) < as.numeric(input$heatPosition[2]))
+    %>%
+      group_by(ALT,REF) %>% summarize(count = n(), .groups = 'drop')     
+  )
+  
+  mut_counts%>%
+    ggvis(~ALT, ~REF, fill=~count)%>%
+    layer_rects(width = band(), height = band()) %>%
+    
+    layer_text(
+      x = prop("x", ~ALT, scale = "xcenter"),
+      y = prop("y", ~REF, scale = "ycenter"),
+      text:=~count, fontSize := 20, fill:="white", baseline:="middle", align:="center") %>%
+    
+    scale_nominal("x", padding = 0, points = FALSE) %>%
+    scale_nominal("y", padding = 0, points = FALSE) %>%
+    add_legend("fill", title="Mutations rates (SNPs)") %>%
+    scale_nominal("x", name = "xcenter", padding = 1, points = TRUE) %>%
+    scale_nominal("y", name = "ycenter", padding = 1, points = TRUE) %>%
+    set_options(width = "auto", resizable=FALSE) %>%
+    bind_shiny("ggvis_output_heatmap")
+  
   
 }

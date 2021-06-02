@@ -6,7 +6,8 @@
 sidebar <- dashboardSidebar(
   sidebarMenu(
     menuItem("Variant Browser", tabName = 'variant_browser', icon = icon("search")),
-    menuItem("SNP Densities", tabName = "snp_densities", icon = icon("chart-area"))
+    menuItem("SNP Densities", tabName = "snp_densities", icon = icon("chart-area")),
+    menuItem("SNP Type Distribution", tabName = "snp_type_distribution", icon = icon("chart-bar"))
   )
 )
 
@@ -28,7 +29,8 @@ body <- dashboardBody(
   tabItems(
     # Variant Browser tab
     browser_tab,
-    snp_densities
+    snp_densities,
+    snp_type_distributions
   )
 )
 
