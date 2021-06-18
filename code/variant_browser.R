@@ -8,18 +8,19 @@ browser_tab <-
                 shinydashboard::box(title = h2("Inputs"), solidHeader = FALSE, width = 12,
                        # Drop down menu to select sample ID
                        selectInput(
-                         inputId='selected_sample',
+                         inputId='selected_sample_browser',
                          label='Sample Id',
                          choices=as.character(unique(variants[,c('sample_id')])),
                          selected = 'OTHER'
                        ),
                        selectInput(
-                         inputId = "chromosome",
+                         inputId = "chromosome_browser",
                          label = "Filter by chromosome",
-                         choices= c("All", unique(variants[,c('CHROM')])),
+                         #choices= c("All", as.character(unique(variants[,c('CHROM')]))),#
+                         choices = c('All', 1:23),
                          selected = 'All'
                          ),
-                       uiOutput("coordinates"),
+                       uiOutput("coordinates_browser"),
                        div(style='height:100px;', plotOutput('v_ideogram', height="100px"))
                        ), # End of box
                    ), # End of column1

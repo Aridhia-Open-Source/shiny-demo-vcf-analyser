@@ -2,6 +2,9 @@
 ####### SERVER #######
 ######################
 
+#donors <- unique(donors_sample$icgc_donor_id)
+
+
 server <- function(input, output, session) {
   
   ###########################
@@ -16,18 +19,18 @@ server <- function(input, output, session) {
   sample <- reactive({
     
     # Filter by chromosome
-    if (input$chromosome != "All") {
-      variants[variants$CHROM == input$chromosome & variants$sample_id == input$selected_sample, c('sample_id','CHROM','POS','ID','REF','ALT','QUAL','FILTER')]
+    if (input$chromosome_browser != "All") {
+      variants[variants$CHROM == input$chromosome_browser, c('sample_id','CHROM','POS','ID','REF','ALT','QUAL','FILTER')]
     } else {
-      variants[variants$sample_id == input$selected_sample, c('sample_id','CHROM','POS','ID','REF','ALT','QUAL','FILTER')]
+      variants[variants$sample_id == input$selected_sample_browser, c('sample_id','CHROM','POS','ID','REF','ALT','QUAL','FILTER')]
       
     }
     
   })
   
-  output$coordinates <- renderUI({
+  output$coordinates_browser <- renderUI({
     sliderInput(
-      inputId = "coordinates",
+      inputId = "coordinates_browser",
       label = "Filter by position",
       min = min(sample()$POS),
       max = max(sample()$POS),
@@ -38,13 +41,13 @@ server <- function(input, output, session) {
   
   available_sample <- reactive({
 
-      sample()[sample()$POS >= input$coordinates[1] & sample()$POS <= input$coordinates[2], c('sample_id','CHROM','POS','ID','REF','ALT','QUAL','FILTER')]
+      sample()[sample()$POS >= input$coordinates_browser[1] & sample()$POS <= input$coordinates_browser[2], c('sample_id','CHROM','POS','ID','REF','ALT','QUAL','FILTER')]
     
   })
   
   available_header <- reactive({
     
-    vcf_header[vcf_header$sample_id==input$selected_sample,c('sample_id','category','id','number','type','description','assembly','length')]
+    vcf_header[vcf_header$sample_id==input$selected_sample_browser,c('sample_id','category','id','number','type','description','assembly','length')]
     
   })
   
@@ -149,18 +152,8 @@ server <- function(input, output, session) {
   
   # Add an ideogram
   ideogram <- reactive({ 
-    if (is.null(input$variants_table_rows_selected)) {
       p.ideo <- Ideogram(genome = "hg19", aspect.ratio=1/10, size=2)
       p.ideo
-    } else {
-      p.ideo <- Ideogram(genome = "hg19", aspect.ratio=1/10, size=2)
-      chr <- variants[input$variants_table_rows_selected, c('CHROM')]
-      start <- variants[input$variants_table_rows_selected, c('POS')] + input$coordinates[1]
-      end <- variants[input$variants_table_rows_selected, c('POS')] + input$coordinates[2]
-      gr <- GRanges(chr, IRanges(start = start, end = end))
-      print(gr)
-      p.ideo + xlim(gr)
-    }
     
   });
   
@@ -249,6 +242,16 @@ server <- function(input, output, session) {
               main = "Manhattan Plot of VCF QUAL scores", col = c("blue4", "orange3"), 
               logp = FALSE, ylab = "QUAL" , cex = 0.3)
   )
+  
+  #####################
+  ##### KARYOGRAM #####
+  #####################
+  
+  output$v_karyogram <- renderPlot({  
+    #autoplot(keepSeqlevels(hg19IdeogramCyto, input$KBins), label.color = "black", layout = "karyogram", cytoband = TRUE)
+    autoplot(ideoCyto$hg19, layout = "karyogram", cytobands = TRUE)
+    
+  }) 
   
   
 }
