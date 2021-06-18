@@ -188,7 +188,7 @@ server <- function(input, output, session) {
   ############################
   
   snps <- reactive(
-    subset(variants, CHROM == input$bins & nchar(as.character(REF)) == 1 & nchar(as.character(ALT)) == 1 & as.numeric(POS) > input$position[1] & as.numeric(POS) < input$position[2])
+    subset(variants, CHROM == input$bins_snp & nchar(as.character(REF)) == 1 & nchar(as.character(ALT)) == 1 & as.numeric(POS) > input$position_snp[1] & as.numeric(POS) < input$position_snp[2])
   )
   
   snps %>% ggvis(~POS, fill:="red") %>%
@@ -196,7 +196,7 @@ server <- function(input, output, session) {
     add_axis("x", title_offset = 60, title = "Chromosome Position") %>%
     add_axis("y", title_offset = 110, title = "Density") %>%
     set_options(width = "auto", resizable=FALSE) %>%
-    bind_shiny("ggvis_output_density")
+      bind_shiny("ggivs_output_density_snp")
   
   
   #################################
