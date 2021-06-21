@@ -16,8 +16,8 @@ browser_tab <-
                        selectInput(
                          inputId = "chromosome_browser",
                          label = "Filter by chromosome",
-                         #choices= c("All", as.character(unique(variants[,c('CHROM')]))),#
-                         choices = c('All', 1:23),
+                         choices= c("All", as.character(unique(variants[,c('CHROM')]))),
+                         #choices = c('All', 1:23),
                          selected = 'All'
                          ),
                        uiOutput("coordinates_browser"),

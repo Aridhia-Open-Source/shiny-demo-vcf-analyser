@@ -37,7 +37,6 @@ snp_type_distributions <-
                                   
                            ),
                            column(9,
-                                  p('Heatmap showing Single Nucleotide Polymorphism counts by base change.'),
                                   ggvisOutput("ggvis_output_heatmap")
                            ),
                          ), #End of fluidRow

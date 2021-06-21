@@ -152,8 +152,20 @@ server <- function(input, output, session) {
   
   # Add an ideogram
   ideogram <- reactive({ 
+    if (input$chromosome_browser == "All") {
       p.ideo <- Ideogram(genome = "hg19", aspect.ratio=1/10, size=2)
       p.ideo
+    } else {
+      
+      chr <- variants[variants$CHROM == input$chromosome_browser, 'CHROM']
+      p.ideo <- Ideogram(genome = "hg19", aspect.ratio=1/10, size=2)
+      #start <- input$coordinates[1]
+      #end <- input$coordinates[2]
+      #gr <- GRanges(chr, IRanges(start = start, end = end))
+      #print(gr)
+      p.ideo
+    }
+    
     
   });
   
@@ -196,7 +208,7 @@ server <- function(input, output, session) {
     add_axis("x", title_offset = 60, title = "Chromosome Position") %>%
     add_axis("y", title_offset = 110, title = "Density") %>%
     set_options(width = "auto", resizable=FALSE) %>%
-      bind_shiny("ggivs_output_density_snp")
+    bind_shiny("ggvis_output_density")
   
   
   #################################
@@ -230,28 +242,29 @@ server <- function(input, output, session) {
   ##### VARIANT QUAL DISTRIBUION #####
   ####################################
   
-  variants$CHROM <- gsub("chr","",variants$CHROM)
-  variants$CHROM <- gsub("X","23",variants$CHROM)
-  variants$CHROM <- gsub("Y","24",variants$CHROM)
-  variants$CHROM <- gsub("MT","25",variants$CHROM)
-  variants$CHROM <- as.numeric(as.character(variants$CHROM))
+  variants1 <- variants
+  
+  variants1$CHROM <- gsub("chr","",variants1$CHROM)
+  variants1$CHROM <- gsub("X","23",variants1$CHROM)
+  variants1$CHROM <- gsub("Y","24",variants1$CHROM)
+  variants1$CHROM <- gsub("MT","25",variants1$CHROM)
+  variants1$CHROM <- as.numeric(as.character(variants1$CHROM))
+  
+  qual <- reactive(
+    if (input$QBins == 'All'){
+      variants1
+    } else{
+      subset(variants1, CHROM == input$QBins)
+    }
+    
+  )
   
   output$manhattan <- renderPlot(      
-    manhattan(variants, snp = "ID", bp = "POS", chr = "CHROM", p = "QUAL", 
+    manhattan(qual(), snp = "ID", bp = "POS", chr = "CHROM", p = "QUAL", 
               suggestiveline = 33, genomewideline = FALSE, chrlabs = c(1:21, "X", "Y"), 
               main = "Manhattan Plot of VCF QUAL scores", col = c("blue4", "orange3"), 
               logp = FALSE, ylab = "QUAL" , cex = 0.3)
   )
-  
-  #####################
-  ##### KARYOGRAM #####
-  #####################
-  
-  output$v_karyogram <- renderPlot({  
-    #autoplot(keepSeqlevels(hg19IdeogramCyto, input$KBins), label.color = "black", layout = "karyogram", cytoband = TRUE)
-    autoplot(ideoCyto$hg19, layout = "karyogram", cytobands = TRUE)
-    
-  }) 
   
   
 }
