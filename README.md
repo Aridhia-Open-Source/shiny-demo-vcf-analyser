@@ -46,4 +46,26 @@ The values in the QUAL column in the VCF file are Phred-scaled quality scores, w
 
 This tab shows a Manhattan plot of all the quality scores in the VCF file, the user can filter by chromosome.
 
+## Data
 
+The data for this demo app was obtained using the FTP site in ClinVar (https://www.ncbi.nlm.nih.gov/clinvar/). At the time of writing: ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz.
+
+## Checkout and Run
+
+You can clone this repository by using the command:
+
+```
+git clone https://github.com/aridhia/demo-vcf/analyser
+```
+
+Open the .Rproj file in RStudio, soruce the script called `dependencies.R` to install all the packages required by the app and run `runApp()` to start the app.
+
+### Deploying to the workspace
+
+1. Create a new blank mini-app in the worksapce called "VCF_Analyser" and delete the folder created for it
+2. Download this GitHub repo and a ZIP file, or clone the repository and zip all the files
+3. Upload the ZIP file to the workspace and unzip it inside a folder called "VCF_Analyser"
+4. Run the `dependencies.R` script to install all the packages required by the app
+5. Run the app in your workspace
+
+For more information visit https://knowledgebase.aridhia.io/article/how-to-upload-your-mini-app/
