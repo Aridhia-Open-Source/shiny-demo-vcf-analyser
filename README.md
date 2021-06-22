@@ -38,7 +38,7 @@ This tab displays a graph showing the SNP distributions. Using the left-side box
 
 ### SNP Type Distribution
 
-This tab displays a heatmap showing the number of SNPs by base change. sing the left-side box (Inputs), the user can filter the data being displayed in the graph by choosing a different chromosome and a specific genomic range.
+This tab displays a heatmap showing the number of SNPs by base change. Using the left-side box (Inputs), the user can filter the data being displayed in the graph by choosing a different chromosome and a specific genomic range.
 
 ### Quality Distribution
 
