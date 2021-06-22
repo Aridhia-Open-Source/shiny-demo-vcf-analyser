@@ -17,6 +17,8 @@ library(DT)
 library(GenomicRanges)
 library(ggvis)
 library(qqman)
+library(BiocManager)
+options(repos = BiocManager::repositories())
 
 
 # Set color=
