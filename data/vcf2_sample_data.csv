@@ -1,2 +1,0 @@
-sample_id, study_ref, sample_ref, vcf_path, vcf_format, bam_path
-949,GELS00000000027,GELG00000000062,/geldisk2/Data/GELS00000000027/GELG00000000062/demo.1kg.vcf,VCFv4.1,/geldisk2/Data/GELS00000000027/GELG00000000062/GELG00000000062.bam
