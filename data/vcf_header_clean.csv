@@ -1,0 +1,85 @@
+sample_id,category,id,number,type,description,length,assembly
+OTHER,##fileformat,,,,"VCFv4.1",,
+OTHER,##INFO,OID,.,String,"List of original Hotspot IDs",,
+OTHER,##INFO,OPOS,.,Integer,"List of original allele positions",,
+OTHER,##INFO,OREF,.,String,"List of original reference bases",,
+OTHER,##INFO,OALT,.,String,"List of original variant bases",,
+OTHER,##INFO,OMAPALT,.,String,"Maps OID,OPOS,OREF
+OTHER,##FORMAT,AO,A,Integer,"Alternate allele observation count",,
+OTHER,##FORMAT,DP,1,Integer,"Read Depth",,
+OTHER,##FORMAT,FAO,A,Integer,"Flow Evaluator Alternate allele observation count",,
+OTHER,##FORMAT,FDP,1,Integer,"Flow Evaluator Read Depth",,
+OTHER,##FORMAT,FRO,1,Integer,"Flow Evaluator Reference allele observation count",,
+OTHER,##FORMAT,FSAF,A,Integer,"Flow Evaluator Alternate allele observations on the forward strand",,
+OTHER,##FORMAT,FSAR,A,Integer,"Flow Evaluator Alternate allele observations on the reverse strand",,
+OTHER,##FORMAT,FSRF,1,Integer,"Flow Evaluator reference observations on the forward strand",,
+OTHER,##FORMAT,FSRR,1,Integer,"Flow Evaluator reference observations on the reverse strand",,
+OTHER,##FORMAT,GQ,1,Float,"Genotype Quality, the Phred-scaled marginal (or unconditional) probability of the called genotype",
+OTHER,##FORMAT,GT,1,String,"Genotype",,
+OTHER,##FORMAT,RO,1,Integer,"Reference allele observation count",,
+OTHER,##FORMAT,SAF,A,Integer,"Alternate allele observations on the forward strand",,
+OTHER,##FORMAT,SAR,A,Integer,"Alternate allele observations on the reverse strand",,
+OTHER,##FORMAT,SRF,1,Integer,"Number of reference observations on the forward strand",,
+OTHER,##FORMAT,SRR,1,Integer,"Number of reference observations on the reverse strand",,
+OTHER,##INFO,AO,A,Integer,"Alternate allele observations",,
+OTHER,##INFO,DP,1,Integer,"Total read depth at the locus",,
+OTHER,##INFO,FAO,A,Integer,"Flow Evaluator Alternate allele observations",,
+OTHER,##INFO,FDP,1,Integer,"Flow Evaluator read depth at the locus",,
+OTHER,##INFO,FR,1,String,"Reason why the variant was filtered.",,
+OTHER,##INFO,FRO,1,Integer,"Flow Evaluator Reference allele observations",,
+OTHER,##INFO,FSAF,A,Integer,"Flow Evaluator Alternate allele observations on the forward strand",,
+OTHER,##INFO,FSAR,A,Integer,"Flow Evaluator Alternate allele observations on the reverse strand",,
+OTHER,##INFO,FSRF,1,Integer,"Flow Evaluator Reference observations on the forward strand",,
+OTHER,##INFO,FSRR,1,Integer,"Flow Evaluator Reference observations on the reverse strand",,
+OTHER,##INFO,FWDB,A,Float,"Forward strand bias in prediction.",,
+OTHER,##INFO,HRUN,A,Integer,"Run length: the number of consecutive repeats of the alternate allele in the reference genome",,
+OTHER,##INFO,HS,0,Flag,"Indicate it is at a hot spot",,
+OTHER,##INFO,LEN,A,Integer,"allele length",,
+OTHER,##INFO,MLLD,A,Float,"Mean log-likelihood delta per read.",,
+OTHER,##INFO,NR,1,String,"Reason why the variant is a No-Call.",,
+OTHER,##INFO,NS,1,Integer,"Number of samples with data",,
+OTHER,##INFO,RBI,A,Float,"Distance of bias parameters from zero.",,
+OTHER,##INFO,REFB,A,Float,"Reference Hypothesis bias in prediction.",,
+OTHER,##INFO,REVB,A,Float,"Reverse strand bias in prediction.",,
+OTHER,##INFO,RO,1,Integer,"Reference allele observations",,
+OTHER,##INFO,SAF,A,Integer,"Alternate allele observations on the forward strand",,
+OTHER,##INFO,SAR,A,Integer,"Alternate allele observations on the reverse strand",,
+OTHER,##INFO,SRF,1,Integer,"Number of reference observations on the forward strand",,
+OTHER,##INFO,SRR,1,Integer,"Number of reference observations on the reverse strand",,
+OTHER,##INFO,SSEN,1,Float,"Strand-specific-error prediction on negative strand.",,
+OTHER,##INFO,SSEP,1,Float,"Strand-specific-error prediction on positive strand.",,
+OTHER,##INFO,STB,1,Float,"Strand bias in variant relative to reference.",,
+OTHER,##INFO,SXB,1,Float,"Experimental strand bias based on approximate bayesian score for difference in frequency.",,
+OTHER,##INFO,TYPE,A,String,"The type of allele, either snp, mnp
+OTHER,##INFO,VARB,A,Float,"Variant Hypothesis bias in prediction.",,
+OTHER,##LeftAlignVariants,,,,"analysis_type=LeftAlignVariants bypassFlowAlign=true kmer_len=19 min_var_count=5 short_suffix_match=5 min_indel_size=4 max_hp_length=8 min_var_freq=0.15 min_var_score=10.0 relative_strand_bias=0.8 output_mnv=0 sse_hp_size=0 sse_report_file= target_size=1.0 pref_kmer_max=3 pref_kmer_min=0 pref_delta_max=2 pref_delta_min=0 suff_kmer_max=3 suff_kmer_min=0 suff_delta_max=2 suff_delta_min=0 motif_min_ppv=0.2 generate_flow_position=0 input_file=[] read_buffer_size=null phone_home=STANDARD gatk_key=null read_filter=[] intervals=null excludeIntervals=null interval_set_rule=UNION interval_merging=ALL reference_sequence=/results/referenceLibrary/tmap-f3/hg19/hg19.fasta rodBind=[] nonDeterministicRandomSeed=false downsampling_type=BY_SAMPLE downsample_to_fraction=null downsample_to_coverage=1000 baq=OFF baqGapOpenPenalty=40.0 performanceLog=null useOriginalQualities=false BQSR=null defaultBaseQualities=-1 validation_strictness=SILENT unsafe=null num_threads=1 combined_sample_name= num_cpu_threads=null num_io_threads=null num_bam_file_handles=null read_group_black_list=null pedigree=[] pedigreeString=[] pedigreeValidationType=STRICT allow_intervals_with_unindexed_bam=false logging_level=INFO log_to_file=null help=false variant=(RodBinding name=variant source=/results/analysis/output/Home/Proton_P1_AmpliSeq_Exome_TS3.6.2_011/plugin_out/variantCaller_out/IonXpress_047/small_variants.sorted.vcf) out=org.broadinstitute.sting.gatk.io.stubs.VCFWriterStub NO_HEADER=org.broadinstitute.sting.gatk.io.stubs.VCFWriterStub sites_only=org.broadinstitute.sting.gatk.io.stubs.VCFWriterStub filter_mismatching_base_and_quals=false",,
+OTHER,##contig,chr1,,,,249250621,"hg19"
+OTHER,##contig,chr10,,,,135534747,"hg19"
+OTHER,##contig,chr11,,,,135006516,"hg19"
+OTHER,##contig,chr12,,,,133851895,"hg19"
+OTHER,##contig,chr13,,,,115169878,"hg19"
+OTHER,##contig,chr14,,,,107349540,"hg19"
+OTHER,##contig,chr15,,,,102531392,"hg19"
+OTHER,##contig,chr16,,,,90354753,"hg19"
+OTHER,##contig,chr17,,,,81195210,"hg19"
+OTHER,##contig,chr18,,,,78077248,"hg19"
+OTHER,##contig,chr19,,,,59128983,"hg19"
+OTHER,##contig,chr2,,,,243199373,"hg19"
+OTHER,##contig,chr20,,,,63025520,"hg19"
+OTHER,##contig,chr21,,,,48129895,"hg19"
+OTHER,##contig,chr22,,,,51304566,"hg19"
+OTHER,##contig,chr3,,,,198022430,"hg19"
+OTHER,##contig,chr4,,,,191154276,"hg19"
+OTHER,##contig,chr5,,,,180915260,"hg19"
+OTHER,##contig,chr6,,,,171115067,"hg19"
+OTHER,##contig,chr7,,,,159138663,"hg19"
+OTHER,##contig,chr8,,,,146364022,"hg19"
+OTHER,##contig,chr9,,,,141213431,"hg19"
+OTHER,##contig,chrM,,,,16569,"hg19"
+OTHER,##contig,chrX,,,,155270560,"hg19"
+OTHER,##contig,chrY,,,,59373566,"hg19"
+OTHER,##fileDate,,,,"20130821",,
+OTHER,##phasing,,,,"none",,
+OTHER,##reference,,,,"/results/referenceLibrary/tmap-f3/hg19/hg19.fasta",,
+OTHER,##reference,,,,"file:///results/referenceLibrary/tmap-f3/hg19/hg19.fasta",,
+OTHER,##source,,,,"Torrent Unified Variant Caller (Extension of freeBayes)",,

@@ -11,18 +11,14 @@ server <- function(input, output, session) {
   ##### VARIANT BROWSER #####
   ###########################
   
-  start.loc <- 0
-  end.loc <- 150000
-  chr1.gr <- GenomicRanges::GRanges("X", IRanges(start.loc, end.loc))
-  
   # Filter data by the sample selector
   sample <- reactive({
     
     # Filter by chromosome
     if (input$chromosome_browser != "All") {
-      variants[variants$CHROM == input$chromosome_browser, c('sample_id','CHROM','POS','ID','REF','ALT','QUAL','FILTER')]
+      variants[variants$CHROM == input$chromosome_browser, ]
     } else {
-      variants[variants$sample_id == input$selected_sample_browser, c('sample_id','CHROM','POS','ID','REF','ALT','QUAL','FILTER')]
+      variants[variants$sample_id == input$selected_sample_browser, ]
       
     }
     
@@ -41,13 +37,13 @@ server <- function(input, output, session) {
   
   available_sample <- reactive({
 
-      sample()[sample()$POS >= input$coordinates_browser[1] & sample()$POS <= input$coordinates_browser[2], c('sample_id','CHROM','POS','ID','REF','ALT','QUAL','FILTER')]
+      sample()[sample()$POS >= input$coordinates_browser[1] & sample()$POS <= input$coordinates_browser[2], ]
     
   })
   
   available_header <- reactive({
     
-    vcf_header[vcf_header$sample_id==input$selected_sample_browser,c('sample_id','category','id','number','type','description','assembly','length')]
+    vcf_header[vcf_header$sample_id == input$selected_sample_browser, ]
     
   })
   
@@ -127,7 +123,7 @@ server <- function(input, output, session) {
     '</span>'));
   
   #TODO would be nice to render the icon too, conditionally?
-  output$v_quality = renderText(paste0('Quality: ', ifelse(is.null(input$variants_table_rows_selected), 'No row Selected', variants[input$variants_table_rows_selected, c('QUAL')])))
+  output$v_quality <- renderText(paste0('Quality: ', ifelse(is.null(input$variants_table_rows_selected), 'No row Selected', variants[input$variants_table_rows_selected, c('QUAL')])))
   
   #Anything in clinvar?
   cvc <- reactive({
@@ -150,42 +146,7 @@ server <- function(input, output, session) {
   # Number of clinical variants on the position
   output$v_clinvar_count <- renderText(paste0('Clinvar variants: ', cvc()))
   
-  # Add an ideogram
-  ideogram <- reactive({ 
-    if (input$chromosome_browser == "All") {
-      p.ideo <- Ideogram(genome = "hg19", aspect.ratio=1/10, size=2)
-      p.ideo
-    } else {
-      
-      chr <- variants[variants$CHROM == input$chromosome_browser, 'CHROM']
-      p.ideo <- Ideogram(genome = "hg19", aspect.ratio=1/10, size=2)
-      #start <- input$coordinates[1]
-      #end <- input$coordinates[2]
-      #gr <- GRanges(chr, IRanges(start = start, end = end))
-      #print(gr)
-      p.ideo
-    }
-    
-    
-  });
   
-  output$v_ideogram <- renderPlot(    
-    
-    ideogram()
-  );
-  
-  info_field <- reactive ({   
-    
-    validate(
-      need(is.numeric(input$variants_table_rows_selected), "Select a variant to view annotations.")
-    )
-    
-    info_string <- variants[input$variants_table_rows_selected, c('INFO')]
-    
-    info_vec <- c(strsplit(info_string, ";")[[1]][1:length(strsplit(info_string, ";")[[1]])]) 
-    info_table <- data.frame("Key" = gsub("(.*)(=)(.*)", "\\1", info_vec), "Value" = gsub("(.*)(=)(.*)", "\\3", info_vec))
-    info_table      
-  })
   
   
   output$v_info <- renderTable({
@@ -238,33 +199,6 @@ server <- function(input, output, session) {
     set_options(width = "auto", resizable=FALSE) %>%
     bind_shiny("ggvis_output_heatmap")
   
-  ####################################
-  ##### VARIANT QUAL DISTRIBUION #####
-  ####################################
-  
-  variants1 <- variants
-  
-  variants1$CHROM <- gsub("chr","",variants1$CHROM)
-  variants1$CHROM <- gsub("X","23",variants1$CHROM)
-  variants1$CHROM <- gsub("Y","24",variants1$CHROM)
-  variants1$CHROM <- gsub("MT","25",variants1$CHROM)
-  variants1$CHROM <- as.numeric(as.character(variants1$CHROM))
-  
-  qual <- reactive(
-    if (input$QBins == 'All'){
-      variants1
-    } else{
-      subset(variants1, CHROM == input$QBins)
-    }
-    
-  )
-  
-  output$manhattan <- renderPlot(      
-    manhattan(qual(), snp = "ID", bp = "POS", chr = "CHROM", p = "QUAL", 
-              suggestiveline = 33, genomewideline = FALSE, chrlabs = c(1:21, "X", "Y"), 
-              main = "Manhattan Plot of VCF QUAL scores", col = c("blue4", "orange3"), 
-              logp = FALSE, ylab = "QUAL" , cex = 0.3)
-  )
   
   
 }

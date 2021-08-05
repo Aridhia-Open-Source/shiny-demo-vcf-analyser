@@ -17,13 +17,11 @@ browser_tab <-
                          inputId = "chromosome_browser",
                          label = "Filter by chromosome",
                          choices= c("All", as.character(unique(variants[,c('CHROM')]))),
-                         #choices = c('All', 1:23),
                          selected = 'All'
                          ),
-                       uiOutput("coordinates_browser"),
-                       div(style='height:100px;', plotOutput('v_ideogram', height="100px"))
-                       ), # End of box
-                   ), # End of column1
+                       uiOutput("coordinates_browser")
+                  ), # End of box
+            ), # End of column1
             column(6,
                    # Table that prints filtered data by sample ID
                    DTOutput("variants_table"),
@@ -41,10 +39,6 @@ browser_tab <-
                      h4(htmlOutput("v_collapse_button"))
                    ), #End of box2
                    br(),
-                   # Plot the INFO field                            
-                   div(style='height:200px; width:200px; overflow-y: scroll',
-                       tableOutput('v_info')
-                   )
                    ), # End of column3
             
           ) # End of fluid Row

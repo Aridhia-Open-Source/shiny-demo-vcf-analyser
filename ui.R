@@ -8,7 +8,6 @@ sidebar <- dashboardSidebar(
     menuItem("Variant Browser", tabName = 'variant_browser', icon = icon("search")),
     menuItem("SNP Densities", tabName = "snp_densities", icon = icon("chart-area")),
     menuItem("SNP Type Distribution", tabName = "snp_type_distribution", icon = icon("chart-bar")),
-    menuItem("Variants Quality Distribution", tabName = "variant_qual_distribution", icon = icon("chart-bar")),
     menuItem("Help Tab", tabName = "help_tab", icon = icon("question-circle"))
   )
 )
@@ -33,7 +32,6 @@ body <- dashboardBody(
     browser_tab,
     snp_densities,
     snp_type_distributions,
-    variant_qual_distribution,
     tabItem(tabName = "help_tab",
             fluidRow(documentation_tab()))
   )
