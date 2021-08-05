@@ -10,21 +10,21 @@ documentation_tab <- function() {
                          tags$li(strong("SNP Densities"), 
                                  " displays a graph showing the SNP distributions, the user can filter the data by choosing a chromosome and a specific genomic range."),
                          tags$li(strong("SNP Type Distribution "), 
-                                 "shows a heatmap with the number of SNPs by base change. The user can filter the data by chromosome and genomic range."), 
+                                 "shows a heatmap with the number of SNPs by base change. The user can filter the data by chromosome and genomic range."),
                          tags$li(strong("Quality Distribuion "), "shows a Manhattan plot of the quality scores for each variant. The user can filter by chromosome.")
                        ),
                        br(),
                        p("The data used in this demo app was extracted from ClinVar FTP.")
                      ),
-                     #column(
-                      # 6,
-                       #h3("Walkthrough video"),
-                       #tags$video(src="survival.mp4", type = "video/mp4", width="100%", height = "350", frameborder = "0", controls = NA),
-                       #p(class = "nb", "NB: This mini-app is for provided for demonstration purposes, is unsupported and is utilised at user's 
-                       #risk. If you plan to use this mini-app to inform your study, please review the code and ensure you are 
-                       #comfortable with the calculations made before proceeding. ")
+                     column(
+                       6,
+                       h3("Walkthrough video"),
+                       tags$video(src="vcf.mp4", type = "video/mp4", width="100%", height = "350", frameborder = "0", controls = NA),
+                       p(class = "nb", "NB: This mini-app is for provided for demonstration purposes, is unsupported and is utilised at user's 
+                       risk. If you plan to use this mini-app to inform your study, please review the code and ensure you are 
+                       comfortable with the calculations made before proceeding. ")
                        
-                     #)
+                     )
                      )
                      
                      

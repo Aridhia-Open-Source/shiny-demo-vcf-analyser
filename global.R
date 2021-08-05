@@ -11,6 +11,7 @@ library(dplyr)
 library(DBI)
 library(DT)
 library(ggvis)
+library(qqman)
 
 
 # Read Data
