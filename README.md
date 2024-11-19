@@ -50,7 +50,7 @@ The data for this demo app was obtained using the FTP site in ClinVar (https://w
 You can clone this repository by using the command:
 
 ```
-git clone https://github.com/aridhia/demo-vcf/analyser
+git clone https://github.com/Aridhia-Open-Source/shiny-demo-vcf-analyser
 ```
 
 Open the .Rproj file in RStudio, soruce the script called `dependencies.R` to install all the packages required by the app and run `runApp()` to start the app.
