@@ -13,7 +13,7 @@ package_install <- function(x) {
   for (i in x){
     # Check if the package is installed
     if (!require(i, character.only = TRUE)){
-      install.packages(i, ...)
+      install.packages(i)
     }
   }
 }
