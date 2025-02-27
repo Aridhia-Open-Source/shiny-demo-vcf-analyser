@@ -5,19 +5,17 @@
 
 # Packages needed to run the app
 packages <- c("shiny", "dplyr", "DBI", "RPostgreSQL", "sqldf", "GenomicRanges", "shinyBS", "ellipsis", "shinydashboard", "ggvis", "qqman",
-              "Cairo", "ggplot2")
+              "Cairo", "ggplot2", "DT")
 
 
 # Install packages if not already installed
-package_install <- function(x){
-  
+package_install <- function(x) {
   for (i in x){
     # Check if the package is installed
     if (!require(i, character.only = TRUE)){
-      install.packages(i, dependencies = TRUE)
+      install.packages(i, ...)
     }
   }
-  
 }
 
 
