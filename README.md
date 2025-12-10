@@ -58,7 +58,7 @@ Open the .Rproj file in RStudio, soruce the script called `dependencies.R` to in
 ### Deploying to the workspace
 
 1. Download this GitHub repo as a .zip file.
-2. Create a new blank Shiny app in your workspace called "vcf-analyser".
+2. Create a new blank R web app in your workspace called "vcf-analyser".
 3. Navigate to the `vcf-analyser` folder under "files".
 4. Delete the `app.R` file from the `vcf-analyser` folder. Make sure you keep the `.version` file!
 5. Upload the .zip file to the `vcf-analyser` folder.
